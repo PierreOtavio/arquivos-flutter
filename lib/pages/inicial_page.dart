@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class InicialPage extends StatelessWidget {
+  const InicialPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,19 +40,22 @@ class InicialPage extends StatelessWidget {
         Expanded(
           child: Container(
             color: Color(0xFF1B1C1E),
-            padding: const EdgeInsets.only(top: 510.0, left: 20.0, right: 20.0),
+            padding: const EdgeInsets.only(top: 165.0, left: 20.0, right: 20.0),
             child: Column(
               children: [
                 TextField(
                     keyboardType: TextInputType.number,
+                    style: TextStyle(color: Colors.white70),
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.person),
                         hintText: 'Usuário(CPF)',
                         border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(13.0),
                           borderSide:
                               BorderSide(color: Color(0xFF013A65), width: 2.0),
                         ),
                         focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(13.0),
                           borderSide:
                               BorderSide(color: Colors.white38, width: 2.0),
                         ))),
@@ -67,6 +72,8 @@ class InicialPage extends StatelessWidget {
 
 //CAMPO DE SENHA, COM O BOTÃO DE OCULTAR E MOSTRAR!
 class PasswordField extends StatefulWidget {
+  const PasswordField({super.key});
+
   @override
   _PasswordFieldState createState() => _PasswordFieldState();
 }
@@ -78,23 +85,33 @@ class _PasswordFieldState extends State<PasswordField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 510.0, left: 20.0, right: 20.0),
-      child: TextField(
-        controller: _controller,
-        obscureText: _ocultado,
-        decoration: (InputDecoration(
-          suffixIcon: Icon(Icons.lock),
-          hintText: 'Senha',
-          border: OutlineInputBorder(),
-          prefixIcon: IconButton(
-            icon: Icon(_ocultado ? Icons.visibility : Icons.visibility_off),
-            onPressed: () {
-              setState(() {
-                _ocultado = !_ocultado;
-              });
-            },
-          ),
-        )),
+      padding: const EdgeInsets.only(top: 40.0, left: 0.0, right: 0.0),
+      child: Container(
+        padding: const EdgeInsets.only(left: 0.0, right: 0.0),
+        child: TextField(
+          controller: _controller,
+          obscureText: _ocultado,
+          style: TextStyle(color: Colors.white70),
+          decoration: (InputDecoration(
+            prefixIcon: Icon(Icons.lock),
+            hintText: 'Senha',
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(13.0),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white38, width: 2.0),
+              borderRadius: BorderRadius.circular(13.0),
+            ),
+            suffixIcon: IconButton(
+              icon: Icon(_ocultado ? Icons.visibility : Icons.visibility_off),
+              onPressed: () {
+                setState(() {
+                  _ocultado = !_ocultado;
+                });
+              },
+            ),
+          )),
+        ),
       ),
     );
   }
@@ -102,6 +119,8 @@ class _PasswordFieldState extends State<PasswordField> {
 
 //CAMPO DE CAIXA SELECIONÁVEL!
 class DropdownField extends StatefulWidget {
+  const DropdownField({super.key});
+
   @override
   _DropdownFieldState createState() => _DropdownFieldState();
 }
@@ -120,17 +139,22 @@ class _DropdownFieldState extends State<DropdownField> {
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      DropdownButton(
-        value: _opcaoSelecionada,
-        hint: Text('Selecione o Centro de Custo'),
-        items: options.map((String option) {
-          return DropdownMenuItem(value: option, child: Text(option));
-        }).toList(),
-        onChanged: (String? newValue) {
-          setState(() {
-            _opcaoSelecionada = newValue;
-          });
-        },
+      Container(
+        decoration: BoxDecoration(),
+        padding: const EdgeInsets.only(top: 30.0, left: 0.0, right: 0.0),
+        child: DropdownButton(
+          borderRadius: BorderRadius.circular(13.0),
+          value: _opcaoSelecionada,
+          hint: Text('Selecione o Centro de Custo', style: TextStyle(color: Colors.white70))),
+          items: options.map((String option) {
+            return DropdownMenuItem(value: option, child: Text(option));
+          }).toList(),
+          onChanged: (String? newValue) {
+            setState(() {
+              _opcaoSelecionada = newValue;
+            });
+          },
+        ),
       ),
     ]);
   }
